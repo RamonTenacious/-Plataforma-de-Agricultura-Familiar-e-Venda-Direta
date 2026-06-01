@@ -5,10 +5,11 @@ const app = express();
 
 const routes = require('./routes/routes');
 
-app.use(routes);
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+app.use(express.urlencoded({
+    extended: true
+}));
 
 app.set('view engine', 'ejs');
 
@@ -22,5 +23,7 @@ app.use(
         path.join(__dirname, 'public')
     )
 );
+
+app.use(routes);
 
 module.exports = app;
