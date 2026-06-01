@@ -4,6 +4,8 @@ const router = express.Router();
 
 const authController = require('../controllers/authController');
 
+const produtoController = require('../controllers/produtoController');
+
 const auth = require('../middlewares/auth');
 
 router.get('/', (req, res) => {
@@ -38,6 +40,30 @@ router.get(
         });
 
     }
+);
+
+router.post(
+    '/produtos',
+    auth,
+    produtoController.criarProduto
+);
+
+router.get(
+    '/produtos',
+    auth,
+    produtoController.listarProdutos
+);
+
+router.put(
+    '/produtos/:id',
+    auth,
+    produtoController.atualizarProduto
+);
+
+router.delete(
+    '/produtos/:id',
+    auth,
+    produtoController.deletarProduto
 );
 
 module.exports = router;
