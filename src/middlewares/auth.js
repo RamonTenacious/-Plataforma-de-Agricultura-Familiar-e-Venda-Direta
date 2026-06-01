@@ -1,20 +1,27 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = (req, res, next) => {
+function auth(req, res, next) {
 
-    const authHeader = req.headers.authorization;
+    const authHeader =
+        req.headers.authorization;
 
-    if (!authHeader)
-        return res.sendStatus(401);
+    if (!authHeader) {
 
-    const token = authHeader.split(' ')[1];
+        return res
+            .status(401)
+            .send('Token não informado');
+    }
+
+    const token =
+        authHeader.split(' ')[1];
 
     try {
 
-        const decoded = jwt.verify(
-            token,
-            'segredo'
-        );
+        const decoded =
+            jwt.verify(
+                token,
+                process.env.JWT_SECRET
+            );
 
         req.userId = decoded.id;
 
@@ -22,6 +29,10 @@ module.exports = (req, res, next) => {
 
     } catch {
 
-        return res.sendStatus(401);
+        return res
+            .status(401)
+            .send('Token inválido');
     }
-};
+}
+
+module.exports = auth;
