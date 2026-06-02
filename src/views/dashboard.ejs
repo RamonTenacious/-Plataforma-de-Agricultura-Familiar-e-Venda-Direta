@@ -1,16 +1,189 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-    <link
-        rel="stylesheet"
-        href="/css/style.css">
-</head>
-<body>
+<%- include('partials/header', {
+    title: 'Dashboard | AgriFácil',
+    description: 'Painel principal da plataforma.',
+    bodyClass: 'page-dashboard',
+    page: 'dashboard'
+}) %>
 
-<h1>Dashboard</h1>
+<%- include('partials/navbar') %>
 
-<p>Usuário logado.</p>
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
 
-</body>
-</html>
+        <div class="card hero-card surface-card section-card">
+            <div class="hero-card__grid">
+                <div>
+                    <span class="badge">Dashboard</span>
+                    <h1 class="page-title">Gerencie produtos e acompanhe seus dados com o frontend em EJS.</h1>
+                    <p class="page-lead">
+                        O token JWT fica salvo no navegador e é enviado automaticamente no header Authorization para as rotas protegidas.
+                    </p>
+
+                    <div class="button-row">
+                        <a class="btn btn-primary" href="#produtos">Ver produtos</a>
+                        <a class="btn btn-ghost" href="#perfil">Abrir perfil</a>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="status-card__label muted small">Status</div>
+                    <div class="status-card__title">Sessão ativa</div>
+                    <div class="status-card__text">Use o botão de logout no menu para encerrar a sessão.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Autenticação</div>
+                    <div class="stat-value" data-user-badge>Visitante</div>
+                    <p class="muted mb-0">Navbar dinâmica com base no JWT salvo no navegador.</p>
+                </div>
+            </div>
+
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Produtos</div>
+                    <div class="stat-value">CRUD completo</div>
+                    <p class="muted mb-0">Criar, listar, editar e excluir com fetch + token.</p>
+                </div>
+            </div>
+
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Perfil</div>
+                    <div class="stat-value">Dados do usuário</div>
+                    <p class="muted mb-0">Página pronta para exibir as informações retornadas por /perfil.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="perfil" class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="profile-header">
+                    <div class="profile-avatar" data-profile-initials>U</div>
+                    <div>
+                        <span class="badge">Perfil rápido</span>
+                        <h2 class="section-heading" data-profile-name>Carregando...</h2>
+                        <p class="muted mb-0">As informações abaixo são carregadas da rota protegida /perfil.</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="muted small mb-1">ID</div>
+                        <div class="info-card__value" data-profile-id>-</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="muted small mb-1">Email</div>
+                        <div class="info-card__value" data-profile-email>-</div>
+                    </div>
+                </div>
+
+                <div class="loading-note" data-profile-loading>
+                    Carregando dados do perfil...
+                </div>
+            </div>
+        </div>
+
+        <div id="produtos" class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-heading">Lista de produtos</h2>
+                        <p class="muted mb-0">Os botões editar e excluir usam as rotas protegidas com JWT.</p>
+                    </div>
+                    <a class="btn btn-primary" href="#novo-produto">Novo produto</a>
+                </div>
+
+                <div class="table-shell">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody data-products-list>
+                            <tr>
+                                <td colspan="5" class="table-empty">Carregando produtos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="novo-produto" class="split-grid">
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <h2 class="section-heading">Criar produto</h2>
+                    <p class="muted mb-4">Cadastro rápido de novo item.</p>
+
+                    <form data-form="produto-create" novalidate class="form-stack">
+                        <div class="field-group">
+                            <label class="field-label" for="produtoCreateNome">Nome</label>
+                            <input id="produtoCreateNome" class="field-input" type="text" name="nome" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="produtoCreatePreco">Preço</label>
+                            <input id="produtoCreatePreco" class="field-input" type="number" step="0.01" min="0" name="preco" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="produtoCreateDescricao">Descrição</label>
+                            <textarea id="produtoCreateDescricao" class="field-input field-textarea" name="descricao" rows="4" required></textarea>
+                        </div>
+
+                        <div class="field-group field-group--compact">
+                            <label class="field-label" for="produtoCreateQuantidade">Quantidade</label>
+                            <input id="produtoCreateQuantidade" class="field-input" type="number" min="0" name="quantidade" required>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">Salvar produto</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <h2 class="section-heading">Editar produto</h2>
+                    <p class="muted mb-4">Preencha os campos e atualize o produto selecionado.</p>
+
+                    <form data-form="produto-edit" data-produto-id="" novalidate class="form-stack">
+                        <div class="field-group">
+                            <label class="field-label" for="produtoEditNome">Nome</label>
+                            <input id="produtoEditNome" class="field-input" type="text" name="nome" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="produtoEditPreco">Preço</label>
+                            <input id="produtoEditPreco" class="field-input" type="number" step="0.01" min="0" name="preco" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="produtoEditDescricao">Descrição</label>
+                            <textarea id="produtoEditDescricao" class="field-input field-textarea" name="descricao" rows="4" required></textarea>
+                        </div>
+
+                        <div class="field-group field-group--compact">
+                            <label class="field-label" for="produtoEditQuantidade">Quantidade</label>
+                            <input id="produtoEditQuantidade" class="field-input" type="number" min="0" name="quantidade" required>
+                        </div>
+
+                        <button class="btn btn-secondary btn-block" type="submit">Atualizar produto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

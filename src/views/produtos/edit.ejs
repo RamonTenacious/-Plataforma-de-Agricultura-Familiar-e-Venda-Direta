@@ -1,0 +1,59 @@
+<%
+    const item = typeof produto !== 'undefined' && produto ? produto : {};
+%>
+
+<%- include('../partials/header', {
+    title: 'Editar produto | AgriFácil',
+    description: 'Formulário para edição de produto.',
+    bodyClass: 'page-products',
+    page: 'produto-edit'
+}) %>
+
+<%- include('../partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
+
+        <div class="centered-shell">
+            <div class="card panel-card surface-card section-card">
+                <div class="card-body">
+                    <span class="badge">Editar produto</span>
+                    <h1 class="section-heading">Atualizar produto</h1>
+                    <p class="muted mb-4">Se o backend passar a variável <strong>produto</strong>, os campos já serão preenchidos.</p>
+
+                    <form data-form="produto-edit" data-produto-id="<%= item.id || '' %>" novalidate class="form-stack">
+                        <div class="split-grid split-grid--2">
+                            <div class="field-group">
+                                <label class="field-label" for="editNome">Nome</label>
+                                <input id="editNome" class="field-input" type="text" name="nome" value="<%= item.nome || '' %>" required>
+                            </div>
+
+                            <div class="field-group">
+                                <label class="field-label" for="editPreco">Preço</label>
+                                <input id="editPreco" class="field-input" type="number" step="0.01" min="0" name="preco" value="<%= item.preco || '' %>" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="editDescricao">Descrição</label>
+                            <textarea id="editDescricao" class="field-input field-textarea" name="descricao" rows="5" required><%= item.descricao || '' %></textarea>
+                        </div>
+
+                        <div class="field-group field-group--compact">
+                            <label class="field-label" for="editQuantidade">Quantidade</label>
+                            <input id="editQuantidade" class="field-input" type="number" min="0" name="quantidade" value="<%= item.quantidade || '' %>" required>
+                        </div>
+
+                        <div class="button-row">
+                            <button class="btn btn-secondary" type="submit">Atualizar produto</button>
+                            <a class="btn btn-ghost" href="/dashboard#produtos">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

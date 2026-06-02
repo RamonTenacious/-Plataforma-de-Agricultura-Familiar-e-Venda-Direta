@@ -1,0 +1,48 @@
+<%- include('../partials/header', {
+    title: 'Produtos | AgriFácil',
+    description: 'Lista de produtos cadastrados.',
+    bodyClass: 'page-products',
+    page: 'produtos-index'
+}) %>
+
+<%- include('../partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
+
+        <div class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="section-header">
+                    <div>
+                        <span class="badge">Produtos</span>
+                        <h1 class="section-heading">Lista de produtos</h1>
+                        <p class="muted mb-0">Visualização completa com editar e excluir.</p>
+                    </div>
+                    <a class="btn btn-primary" href="/dashboard#novo-produto">Novo produto</a>
+                </div>
+
+                <div class="table-shell">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody data-products-list>
+                            <tr>
+                                <td colspan="5" class="table-empty">Carregando produtos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

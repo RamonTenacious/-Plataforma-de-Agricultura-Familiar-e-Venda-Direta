@@ -1,0 +1,50 @@
+<%- include('partials/header', {
+    title: 'Perfil | AgriFácil',
+    description: 'Dados do usuário logado.',
+    bodyClass: 'page-profile',
+    page: 'perfil'
+}) %>
+
+<%- include('partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
+
+        <div class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="profile-header">
+                    <div class="profile-avatar" data-profile-initials>U</div>
+                    <div>
+                        <span class="badge">Perfil do usuário</span>
+                        <h1 class="section-heading" data-profile-name>Carregando...</h1>
+                        <p class="muted mb-0">Os dados são buscados da rota protegida /perfil usando o token JWT.</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="muted small mb-1">ID</div>
+                        <div class="info-card__value" data-profile-id>-</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="muted small mb-1">Email</div>
+                        <div class="info-card__value" data-profile-email>-</div>
+                    </div>
+                </div>
+
+                <div class="button-row mt-4">
+                    <a class="btn btn-primary" href="/dashboard">Voltar ao dashboard</a>
+                    <button class="btn btn-danger" type="button" data-logout>Logout</button>
+                </div>
+
+                <div class="loading-note" data-profile-loading>
+                    Carregando dados do perfil...
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
