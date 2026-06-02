@@ -1,0 +1,63 @@
+<%- include('../partials/header', {
+    title: 'Entrar | AgriFácil',
+    description: 'Acesse sua conta na plataforma.',
+    bodyClass: 'page-auth',
+    page: 'login'
+}) %>
+
+<%- include('../partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section auth-shell">
+        <div class="auth-grid">
+            <div class="hero-panel card surface-card">
+                <span class="badge">Bem-vindo de volta</span>
+                <h1 class="page-title">Entre para gerenciar produtos e acessar seu perfil.</h1>
+                <p class="page-lead">
+                    Use seu email e senha para autenticar. O token JWT será salvo no navegador e enviado automaticamente nas requisições protegidas.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="mini-card">
+                        <div class="mini-card__title">Autenticação segura</div>
+                        <div class="mini-card__text">JWT no frontend com redirecionamento automático.</div>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-card__title">Responsivo</div>
+                        <div class="mini-card__text">Interface adaptada para celular, tablet e desktop.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-card card surface-card">
+                <div class="card-body">
+                    <div data-alerts></div>
+
+                    <h2 class="section-heading">Acessar conta</h2>
+                    <p class="muted mb-4">Digite seus dados para continuar.</p>
+
+                    <form data-form="login" novalidate class="form-stack">
+                        <div class="field-group">
+                            <label for="loginEmail" class="field-label">Email</label>
+                            <input id="loginEmail" class="field-input" type="email" name="email" placeholder="voce@exemplo.com" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="loginSenha" class="field-label">Senha</label>
+                            <input id="loginSenha" class="field-input" type="password" name="senha" placeholder="Sua senha" required>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+                    </form>
+
+                    <div class="auth-footer-link">
+                        Não tem conta?
+                        <a href="/register">Criar cadastro</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

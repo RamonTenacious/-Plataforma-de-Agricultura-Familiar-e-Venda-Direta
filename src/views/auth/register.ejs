@@ -1,0 +1,81 @@
+<%- include('../partials/header', {
+    title: 'Cadastro | AgriFácil',
+    description: 'Crie sua conta na plataforma.',
+    bodyClass: 'page-auth',
+    page: 'register'
+}) %>
+
+<%- include('../partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section auth-shell">
+        <div class="auth-grid auth-grid--reverse">
+            <div class="hero-panel card surface-card">
+                <span class="badge">Comece agora</span>
+                <h1 class="page-title">Crie sua conta e comece a publicar seus produtos.</h1>
+                <p class="page-lead">
+                    Depois do cadastro, faça login e o frontend enviará o JWT em todas as rotas protegidas.
+                </p>
+
+                <ul class="steps-list">
+                    <li>
+                        <span class="step-number">1</span>
+                        <div>
+                            <div class="mini-card__title">Cadastro rápido</div>
+                            <div class="mini-card__text">Nome, email e senha em um formulário simples.</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <div>
+                            <div class="mini-card__title">Token no navegador</div>
+                            <div class="mini-card__text">Armazenamento do JWT via localStorage.</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <div>
+                            <div class="mini-card__title">Acesso ao dashboard</div>
+                            <div class="mini-card__text">A navegação muda conforme o usuário está logado.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="auth-card card surface-card">
+                <div class="card-body">
+                    <div data-alerts></div>
+
+                    <h2 class="section-heading">Criar conta</h2>
+                    <p class="muted mb-4">Preencha seus dados abaixo.</p>
+
+                    <form data-form="register" novalidate class="form-stack">
+                        <div class="field-group">
+                            <label for="registerNome" class="field-label">Nome</label>
+                            <input id="registerNome" class="field-input" type="text" name="nome" placeholder="Seu nome completo" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="registerEmail" class="field-label">Email</label>
+                            <input id="registerEmail" class="field-input" type="email" name="email" placeholder="voce@exemplo.com" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="registerSenha" class="field-label">Senha</label>
+                            <input id="registerSenha" class="field-input" type="password" name="senha" placeholder="Crie uma senha" required>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">Cadastrar</button>
+                    </form>
+
+                    <div class="auth-footer-link">
+                        Já possui conta?
+                        <a href="/">Entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>
