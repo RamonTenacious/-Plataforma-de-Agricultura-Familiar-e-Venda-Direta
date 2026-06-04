@@ -7,6 +7,18 @@
                 <div class="footer-note">© <%= new Date().getFullYear() %> Faculdade</div>
             </div>
         </footer>
+
+        <div class="confirm-modal" data-confirm-modal aria-hidden="true">
+            <div class="confirm-modal__dialog">
+                <div class="confirm-modal__body">
+                    <p class="confirm-modal__message" data-confirm-message>Tem certeza?</p>
+                </div>
+                <div class="confirm-modal__actions">
+                    <button type="button" class="btn btn-ghost" data-confirm-cancel>Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-confirm-confirm>Excluir</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="/js/app.js"></script>
