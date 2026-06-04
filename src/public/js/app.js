@@ -25,8 +25,21 @@
 
     function isAuthenticated() {
         const token = state.token || getToken();
+        if (!token) {
+            state.token = null;
+            return false;
+        }
+
+        const decoded = decodeJwt(token);
+        const nowInSeconds = Math.floor(Date.now() / 1000);
+
+        if (!decoded?.exp || decoded.exp <= nowInSeconds) {
+            clearToken();
+            return false;
+        }
+
         state.token = token;
-        return Boolean(token);
+        return true;
     }
 
     function authHeaders(headers = {}) {
@@ -65,6 +78,7 @@
             setFlash('Sessão expirada. Faça login novamente.', 'danger');
             logout(false);
             window.location.href = '/';
+            return response;
         }
 
         return response;
@@ -104,6 +118,58 @@
             alert.classList.add('is-fading');
             window.setTimeout(() => alert.remove(), 220);
         }, 6000);
+    }
+
+    function openConfirm(message = 'Tem certeza?') {
+        return new Promise((resolve) => {
+            const modal = document.querySelector('[data-confirm-modal]');
+            if (!modal) {
+                // fallback to native confirm when modal not present
+                resolve(window.confirm(message));
+                return;
+            }
+
+            const msgEl = modal.querySelector('[data-confirm-message]');
+            const btnConfirm = modal.querySelector('[data-confirm-confirm]');
+            const btnCancel = modal.querySelector('[data-confirm-cancel]');
+
+            msgEl.textContent = message;
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+
+            const cleanup = (result) => {
+                btnConfirm.removeEventListener('click', onConfirm);
+                btnCancel.removeEventListener('click', onCancel);
+                modal.classList.remove('is-open');
+                modal.setAttribute('aria-hidden', 'true');
+                // small delay to allow visual close
+                window.setTimeout(() => resolve(result), 80);
+            };
+
+            function onConfirm() { cleanup(true); }
+            function onCancel() { cleanup(false); }
+
+            btnConfirm.addEventListener('click', onConfirm);
+            btnCancel.addEventListener('click', onCancel);
+
+            // click outside dialog closes
+            modal.addEventListener('click', function onOverlay(e) {
+                if (e.target === modal) {
+                    modal.removeEventListener('click', onOverlay);
+                    cleanup(false);
+                }
+            });
+
+            // escape key
+            function onKey(e) {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', onKey);
+                    cleanup(false);
+                }
+            }
+
+            document.addEventListener('keydown', onKey);
+        });
     }
 
     function showStoredFlash() {
@@ -253,12 +319,16 @@
                 <td><span class="badge">${escapeHtml(produto.quantidade ?? 0)}</span></td>
                 <td>
                     <div class="d-flex flex-wrap gap-2">
-                        <button class="btn btn-sm btn-secondary" type="button" data-edit-product='${escapeHtml(JSON.stringify(produto))}'>Editar</button>
+                        <button class="btn btn-sm btn-secondary" type="button" data-edit-product>Editar</button>
                         <button class="btn btn-sm btn-danger" type="button" data-delete-product="${escapeHtml(produto.id ?? '')}">Excluir</button>
                     </div>
                 </td>
             </tr>
         `).join('');
+
+        target.querySelectorAll('[data-edit-product]').forEach((button, index) => {
+            button.dataset.editProduct = JSON.stringify(rows[index]);
+        });
     }
 
     async function loadProducts(targetSelector = '[data-products-list]') {
@@ -274,7 +344,7 @@
         `;
 
         try {
-            const response = await apiFetch('/produtos');
+            const response = await apiFetch('/api/produtos');
             if (!response.ok) {
                 throw new Error(await extractResponseMessage(response));
             }
@@ -301,7 +371,7 @@
     }
 
     function handleEditProductShortcut(event) {
-        const raw = event.currentTarget.getAttribute('data-edit-product');
+        const raw = event.currentTarget.dataset.editProduct;
         if (!raw) {
             return;
         }
@@ -320,7 +390,7 @@
                 return;
             }
 
-            window.location.href = `/dashboard?produto=${produto.id ?? ''}`;
+            window.location.href = `/produtos/${produto.id ?? ''}/editar`;
         } catch {
             setFlash('Não foi possível abrir o produto para edição.', 'danger');
         }
@@ -333,13 +403,11 @@
             return;
         }
 
-        const confirmed = window.confirm('Deseja excluir este produto?');
-        if (!confirmed) {
-            return;
-        }
+        const confirmed = await openConfirm('Deseja excluir este produto?');
+        if (!confirmed) return;
 
         try {
-            const response = await apiFetch(`/produtos/${id}`, {
+            const response = await apiFetch(`/api/produtos/${id}`, {
                 method: 'DELETE'
             });
 
@@ -446,7 +514,7 @@
             payload.preco = numberFromInput(payload.preco);
             payload.quantidade = Number(payload.quantidade);
 
-            const response = await apiFetch('/produtos', {
+            const response = await apiFetch('/api/produtos', {
                 method: 'POST',
                 body: JSON.stringify(payload)
             });
@@ -457,7 +525,7 @@
 
             setFlash('Produto criado com sucesso.', 'success');
             form.reset();
-            window.location.href = '/dashboard#produtos';
+            window.location.href = '/produtos';
         } catch (error) {
             renderAlert(error.message || 'Erro ao criar produto.', 'danger');
         } finally {
@@ -491,7 +559,7 @@
             payload.preco = numberFromInput(payload.preco);
             payload.quantidade = Number(payload.quantidade);
 
-            const response = await apiFetch(`/produtos/${produtoId}`, {
+            const response = await apiFetch(`/api/produtos/${produtoId}`, {
                 method: 'PUT',
                 body: JSON.stringify(payload)
             });
@@ -501,7 +569,7 @@
             }
 
             setFlash('Produto atualizado com sucesso.', 'success');
-            window.location.href = '/dashboard#produtos';
+            window.location.href = '/produtos';
         } catch (error) {
             renderAlert(error.message || 'Erro ao atualizar produto.', 'danger');
         } finally {
