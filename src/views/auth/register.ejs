@@ -12,28 +12,29 @@
         <div class="auth-grid auth-grid--reverse">
             <div class="hero-panel card surface-card">
                 <span class="badge">Comece agora</span>
-                <h1 class="page-title">Crie sua conta e comece a publicar seus produtos.</h1>
+                <h1 class="page-title">Venda direto ao consumidor, sem intermediários.</h1>
+                <p class="page-lead">Crie sua conta gratuitamente e publique seus produtos da agricultura familiar em minutos.</p>
 
                 <ul class="steps-list">
                     <li>
                         <span class="step-number">1</span>
                         <div>
                             <div class="mini-card__title">Cadastro rápido</div>
-                            <div class="mini-card__text">Nome, email e senha em um formulário simples.</div>
+                            <div class="mini-card__text">Nome, e-mail e senha em um formulário simples.</div>
                         </div>
                     </li>
                     <li>
                         <span class="step-number">2</span>
                         <div>
                             <div class="mini-card__title">Acesso imediato</div>
-                            <div class="mini-card__text">Autentique-se e acesse sua conta.</div>
+                            <div class="mini-card__text">Faça login e acesse seu painel de controle.</div>
                         </div>
                     </li>
                     <li>
                         <span class="step-number">3</span>
                         <div>
-                            <div class="mini-card__title">Gerencie seus produtos</div>
-                            <div class="mini-card__text">Publique e administre seus anúncios.</div>
+                            <div class="mini-card__title">Publique seus produtos</div>
+                            <div class="mini-card__text">Cadastre itens e gerencie seus anúncios de venda direta.</div>
                         </div>
                     </li>
                 </ul>
@@ -44,25 +45,47 @@
                     <div data-alerts></div>
 
                     <h2 class="section-heading">Criar conta</h2>
-                    <p class="muted mb-4">Preencha seus dados abaixo.</p>
+                    <p class="muted mb-4">Preencha seus dados para começar a usar a plataforma.</p>
 
                     <form data-form="register" novalidate class="form-stack">
                         <div class="field-group">
-                            <label for="registerNome" class="field-label">Nome</label>
-                            <input id="registerNome" class="field-input" type="text" name="nome" placeholder="Seu nome completo" required>
+                            <label for="registerNome" class="field-label">Nome completo</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </span>
+                                <input id="registerNome" class="field-input field-input--icon" type="text" name="nome" placeholder="Seu nome completo" required>
+                            </div>
                         </div>
 
                         <div class="field-group">
-                            <label for="registerEmail" class="field-label">Email</label>
-                            <input id="registerEmail" class="field-input" type="email" name="email" placeholder="voce@exemplo.com" required>
+                            <label for="registerEmail" class="field-label">E-mail</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </span>
+                                <input id="registerEmail" class="field-input field-input--icon" type="email" name="email" placeholder="voce@exemplo.com" required>
+                            </div>
                         </div>
 
                         <div class="field-group">
                             <label for="registerSenha" class="field-label">Senha</label>
-                            <input id="registerSenha" class="field-input" type="password" name="senha" placeholder="Crie uma senha" required>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                                </span>
+                                <input id="registerSenha" class="field-input field-input--icon field-input--padend" type="password" name="senha" placeholder="Crie uma senha" required>
+                                <button type="button" class="input-toggle-pw" data-toggle-pw="registerSenha" aria-label="Mostrar senha">
+                                    <svg class="eye-show" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg class="eye-hide d-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                </button>
+                            </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block" type="submit">Cadastrar</button>
+                        <button class="btn btn-primary btn-block" type="submit">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                            Criar conta
+                        </button>
                     </form>
 
                     <div class="auth-footer-link">
