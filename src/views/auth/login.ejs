@@ -11,17 +11,33 @@
     <section class="page-section auth-shell">
         <div class="auth-grid">
             <div class="hero-panel card surface-card">
-                <span class="badge">Bem-vindo de volta</span>
-                <h1 class="page-title">Entre para gerenciar produtos e acessar seu perfil.</h1>
+                <span class="badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    AgriFácil
+                </span>
+                <h1 class="page-title">Conecte agricultores a consumidores.</h1>
+                <p class="page-lead">Plataforma de venda direta da agricultura familiar. Cadastre seus produtos e alcance clientes sem intermediários.</p>
 
                 <div class="feature-grid">
                     <div class="mini-card">
-                        <div class="mini-card__title">Autenticação segura</div>
-                        <div class="mini-card__text">JWT no frontend com redirecionamento automático.</div>
+                        <div class="mini-card__icon">🌱</div>
+                        <div class="mini-card__title">Agricultura familiar</div>
+                        <div class="mini-card__text">Suporte direto ao produtor local.</div>
                     </div>
                     <div class="mini-card">
+                        <div class="mini-card__icon">🔒</div>
+                        <div class="mini-card__title">Acesso seguro</div>
+                        <div class="mini-card__text">Autenticação com JWT protegida.</div>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-card__icon">📦</div>
+                        <div class="mini-card__title">Gestão de produtos</div>
+                        <div class="mini-card__text">Crie, edite e gerencie seus anúncios.</div>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-card__icon">📱</div>
                         <div class="mini-card__title">Responsivo</div>
-                        <div class="mini-card__text">Interface adaptada para celular, tablet e desktop.</div>
+                        <div class="mini-card__text">Funciona em celular, tablet e desktop.</div>
                     </div>
                 </div>
             </div>
@@ -31,20 +47,37 @@
                     <div data-alerts></div>
 
                     <h2 class="section-heading">Acessar conta</h2>
-                    <p class="muted mb-4">Digite seus dados para continuar.</p>
+                    <p class="muted mb-4">Bem-vindo de volta! Digite seus dados para continuar.</p>
 
                     <form data-form="login" novalidate class="form-stack">
                         <div class="field-group">
-                            <label for="loginEmail" class="field-label">Email</label>
-                            <input id="loginEmail" class="field-input" type="email" name="email" placeholder="voce@exemplo.com" required>
+                            <label for="loginEmail" class="field-label">E-mail</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </span>
+                                <input id="loginEmail" class="field-input field-input--icon" type="email" name="email" placeholder="voce@exemplo.com" required>
+                            </div>
                         </div>
 
                         <div class="field-group">
                             <label for="loginSenha" class="field-label">Senha</label>
-                            <input id="loginSenha" class="field-input" type="password" name="senha" placeholder="Sua senha" required>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                                </span>
+                                <input id="loginSenha" class="field-input field-input--icon field-input--padend" type="password" name="senha" placeholder="Sua senha" required>
+                                <button type="button" class="input-toggle-pw" data-toggle-pw="loginSenha" aria-label="Mostrar senha">
+                                    <svg class="eye-show" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg class="eye-hide d-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                </button>
+                            </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+                        <button class="btn btn-primary btn-block" type="submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            Entrar
+                        </button>
                     </form>
 
                     <div class="auth-footer-link">
