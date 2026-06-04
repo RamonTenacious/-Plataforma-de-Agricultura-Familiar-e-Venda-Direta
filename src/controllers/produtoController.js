@@ -1,5 +1,29 @@
 const { Produto } = require('../models');
 
+function renderProdutosIndex(req, res) {
+    return res.render('produtos/index');
+}
+
+function renderProdutoCreate(req, res) {
+    return res.render('produtos/create');
+}
+
+async function renderProdutoEdit(req, res) {
+    try {
+        const { id } = req.params;
+        const produto = await Produto.findByPk(id);
+
+        if (!produto) {
+            return res.status(404).send('Produto não encontrado');
+        }
+
+        return res.render('produtos/edit', { produto });
+    } catch (error) {
+        console.error('ERRO AO CARREGAR PRODUTO:', error);
+        return res.status(500).send('Erro ao carregar produto');
+    }
+}
+
 // CREATE
 async function criarProduto(req, res) {
 
@@ -84,6 +108,9 @@ async function deletarProduto(req, res) {
 }
 
 module.exports = {
+    renderProdutosIndex,
+    renderProdutoCreate,
+    renderProdutoEdit,
     criarProduto,
     listarProdutos,
     atualizarProduto,

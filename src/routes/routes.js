@@ -9,16 +9,31 @@ const produtoController = require('../controllers/produtoController');
 const auth = require('../middlewares/auth');
 
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('auth/login');
 });
 
 router.get('/register', (req, res) => {
-    res.render('register');
+    res.render('auth/register');
 });
 
 router.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
+
+router.get(
+    '/produtos',
+    produtoController.renderProdutosIndex
+);
+
+router.get(
+    '/produtos/novo',
+    produtoController.renderProdutoCreate
+);
+
+router.get(
+    '/produtos/:id/editar',
+    produtoController.renderProdutoEdit
+);
 
 router.post(
     '/register',
@@ -43,25 +58,25 @@ router.get(
 );
 
 router.post(
-    '/produtos',
+    '/api/produtos',
     auth,
     produtoController.criarProduto
 );
 
 router.get(
-    '/produtos',
+    '/api/produtos',
     auth,
     produtoController.listarProdutos
 );
 
 router.put(
-    '/produtos/:id',
+    '/api/produtos/:id',
     auth,
     produtoController.atualizarProduto
 );
 
 router.delete(
-    '/produtos/:id',
+    '/api/produtos/:id',
     auth,
     produtoController.deletarProduto
 );
