@@ -90,6 +90,12 @@ textarea {
     box-shadow: 0 8px 24px rgba(16, 42, 67, 0.08);
 }
 
+@supports not (backdrop-filter: blur(1px)) {
+    .site-nav {
+        background: rgba(240, 244, 248, 0.97);
+    }
+}
+
 .site-nav__inner {
     min-height: var(--nav-height);
     display: flex;
@@ -609,6 +615,14 @@ textarea {
     color: var(--muted);
 }
 
+.empty-state {
+    display: grid;
+    place-items: center;
+    gap: 0.25rem;
+    min-height: 5rem;
+    color: var(--muted);
+}
+
 .flash {
     display: flex;
     align-items: flex-start;
@@ -659,6 +673,23 @@ textarea {
 
 .d-none {
     display: none !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.gap-2 {
+    gap: 0.5rem !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
 }
 
 .text-white {
@@ -819,4 +850,50 @@ textarea {
     .field-group--compact {
         max-width: none;
     }
+}
+
+/* Confirm modal styles */
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 20, 30, 0.45);
+    z-index: 3000;
+    padding: 1.25rem;
+}
+
+.confirm-modal.is-open {
+    display: flex;
+}
+
+.confirm-modal__dialog {
+    width: min(560px, 96%);
+    border-radius: 1rem;
+    background: var(--surface-solid);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.confirm-modal__body {
+    padding: 1.25rem 1.5rem;
+}
+
+.confirm-modal__message {
+    margin: 0;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.confirm-modal__actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    justify-content: flex-end;
+    background: rgba(0,0,0,0.02);
+}
+
+.confirm-modal__actions .btn {
+    padding: 0.6rem 0.9rem;
 }
