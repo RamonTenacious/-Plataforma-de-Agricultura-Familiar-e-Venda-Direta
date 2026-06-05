@@ -1,0 +1,54 @@
+<%- include('../partials/header', {
+    title: 'Criar produto | AgriFácil',
+    description: 'Formulário para cadastro de produto.',
+    bodyClass: 'page-products',
+    page: 'produto-create'
+}) %>
+
+<%- include('../partials/navbar') %>
+
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
+
+        <div class="centered-shell">
+            <div class="card panel-card surface-card section-card">
+                <div class="card-body">
+                    <span class="badge">Novo produto</span>
+                    <h1 class="section-heading">Criar produto</h1>
+                    <p class="muted mb-4">Preencha os campos para enviar ao backend com JWT.</p>
+
+                    <form data-form="produto-create" novalidate class="form-stack">
+                        <div class="split-grid split-grid--2">
+                            <div class="field-group">
+                                <label class="field-label" for="createNome">Nome</label>
+                                <input id="createNome" class="field-input" type="text" name="nome" required>
+                            </div>
+
+                            <div class="field-group">
+                                <label class="field-label" for="createPreco">Preço</label>
+                                <input id="createPreco" class="field-input" type="number" step="0.01" min="0" name="preco" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="createDescricao">Descrição</label>
+                            <textarea id="createDescricao" class="field-input field-textarea" name="descricao" rows="5" required></textarea>
+                        </div>
+
+                        <div class="field-group field-group--compact">
+                            <label class="field-label" for="createQuantidade">Quantidade</label>
+                            <input id="createQuantidade" class="field-input" type="number" min="0" name="quantidade" required>
+                        </div>
+
+                        <div class="button-row">
+                            <button class="btn btn-primary" type="submit">Salvar produto</button>
+                            <a class="btn btn-ghost" href="/produtos">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/footer') %>
+</main>

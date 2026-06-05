@@ -1,0 +1,42 @@
+<footer class="site-footer">
+            <div class="site-footer__inner">
+                <div>
+                    <div class="footer-note"><strong>🌱 AgriFácil</strong> - Plataforma de venda direta da agricultura familiar.</div>
+                </div>
+                <div class="footer-links">
+                    <span class="footer-note">© <%= new Date().getFullYear() %> Todos os direitos reservados.</span>
+                </div>
+            </div>
+        </footer>
+
+        <div class="confirm-modal" data-confirm-modal aria-hidden="true">
+            <div class="confirm-modal__dialog">
+                <div class="confirm-modal__body">
+                    <p class="confirm-modal__message" data-confirm-message>Tem certeza que deseja excluir este produto?</p>
+                </div>
+                <div class="confirm-modal__actions">
+                    <button type="button" class="btn btn-ghost" data-confirm-cancel>Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-confirm-confirm>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                        Excluir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        document.querySelectorAll('[data-toggle-pw]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = document.getElementById(btn.getAttribute('data-toggle-pw'));
+                if (!input) return;
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                btn.querySelector('.eye-show').classList.toggle('d-none', isPassword);
+                btn.querySelector('.eye-hide').classList.toggle('d-none', !isPassword);
+            });
+        });
+    </script>
+</body>
+</html>

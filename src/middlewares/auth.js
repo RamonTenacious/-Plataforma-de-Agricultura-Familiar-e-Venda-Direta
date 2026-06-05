@@ -1,5 +1,9 @@
 const jwt = require('jsonwebtoken');
 
+const JWT_SECRET =
+    process.env.JWT_SECRET ||
+    'desenvolvimento-plataforma-agricultura-2026';
+
 function auth(req, res, next) {
 
     const authHeader =
@@ -20,7 +24,7 @@ function auth(req, res, next) {
         const decoded =
             jwt.verify(
                 token,
-                process.env.JWT_SECRET
+                JWT_SECRET
             );
 
         req.userId = decoded.id;

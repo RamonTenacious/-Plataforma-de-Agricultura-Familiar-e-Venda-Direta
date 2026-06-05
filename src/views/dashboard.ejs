@@ -1,16 +1,141 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-    <link
-        rel="stylesheet"
-        href="/css/style.css">
-</head>
-<body>
+<%- include('partials/header', {
+    title: 'Dashboard | AgriFácil',
+    description: 'Painel principal da plataforma.',
+    bodyClass: 'page-dashboard',
+    page: 'dashboard'
+}) %>
 
-<h1>Dashboard</h1>
+<%- include('partials/navbar') %>
 
-<p>Usuário logado.</p>
+<main class="main-content">
+    <section class="page-section">
+        <div data-alerts></div>
 
-</body>
-</html>
+        <div class="card hero-card surface-card section-card">
+            <div class="hero-card__grid">
+                <div>
+                    <span class="badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        Bem-vindo ao AgriFácil
+                    </span>
+                    <h1 class="page-title">Seu painel de gestão de produtos.</h1>
+                    <p class="page-lead">
+                        Gerencie seus produtos da agricultura familiar, acompanhe seu perfil e publique anúncios diretamente para consumidores.
+                    </p>
+
+                    <div class="button-row">
+                        <a class="btn btn-primary" href="/produtos/novo">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Novo produto
+                        </a>
+                        <a class="btn btn-ghost" href="#perfil">Meu perfil</a>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="status-card__label muted small">Sessão ativa</div>
+                    <div class="status-card__title" data-profile-name>—</div>
+                    <div class="status-card__text">Você está autenticado. Use o botão de logout no menu para encerrar a sessão.</div>
+                    <div style="margin-top:0.9rem">
+                        <span class="product-tag">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Sessão ativa
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Usuário</div>
+                    <div class="stat-value" data-profile-name>—</div>
+                    <p class="muted mb-0">Conta autenticada na plataforma.</p>
+                </div>
+            </div>
+
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Produtos</div>
+                    <div class="stat-value" data-produtos-count>—</div>
+                    <p class="muted mb-0">Itens cadastrados por você.</p>
+                </div>
+            </div>
+
+            <div class="card panel-card surface-card">
+                <div class="card-body">
+                    <div class="muted small mb-1">Plataforma</div>
+                    <div class="stat-value">AgriFácil</div>
+                    <p class="muted mb-0">Venda direta, sem intermediários.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="perfil" class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="profile-header">
+                    <div class="profile-avatar" data-profile-initials>U</div>
+                    <div>
+                        <span class="badge">Meu perfil</span>
+                        <h2 class="section-heading" data-profile-name>Carregando...</h2>
+                        <p class="muted mb-0">Informações da sua conta na plataforma AgriFácil.</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="muted small mb-1">ID do usuário</div>
+                        <div class="info-card__value" data-profile-id>—</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="muted small mb-1">E-mail</div>
+                        <div class="info-card__value" data-profile-email>—</div>
+                    </div>
+                </div>
+
+                <div class="loading-note" data-profile-loading>
+                    Carregando dados do perfil...
+                </div>
+            </div>
+        </div>
+
+        <div id="produtos" class="card panel-card surface-card section-card">
+            <div class="card-body">
+                <div class="section-header">
+                    <div>
+                        <span class="badge">Meus produtos</span>
+                        <h2 class="section-heading">Lista de produtos</h2>
+                        <p class="muted mb-0">Gerencie seus anúncios. Clique em editar ou excluir para administrar cada item.</p>
+                    </div>
+                    <a class="btn btn-primary" href="/produtos/novo">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Novo produto
+                    </a>
+                </div>
+
+                <div class="table-shell">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody data-products-list>
+                            <tr>
+                                <td colspan="5" class="table-empty">Carregando produtos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

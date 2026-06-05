@@ -9,16 +9,31 @@ const produtoController = require('../controllers/produtoController');
 const auth = require('../middlewares/auth');
 
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('auth/login');
 });
 
 router.get('/register', (req, res) => {
-    res.render('register');
+    res.render('auth/register');
 });
 
 router.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
+
+router.get(
+    '/produtos',
+    produtoController.renderProdutosIndex
+);
+
+router.get(
+    '/produtos/novo',
+    produtoController.renderProdutoCreate
+);
+
+router.get(
+    '/produtos/:id/editar',
+    produtoController.renderProdutoEdit
+);
 
 router.post(
     '/register',
@@ -30,38 +45,49 @@ router.post(
     authController.login
 )
 
+const { User } = require('../models');
+
 router.get(
     '/perfil',
     auth,
-    (req, res) => {
+    async (req, res) => {
+        try {
+            const usuario = await User.findByPk(req.userId, {
+                attributes: ['id', 'nome', 'email']
+            });
 
-        res.json({
-            usuario: req.userId
-        });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuário não encontrado.' });
+            }
 
+            return res.json({ usuario });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Erro ao buscar perfil.' });
+        }
     }
 );
 
 router.post(
-    '/produtos',
+    '/api/produtos',
     auth,
     produtoController.criarProduto
 );
 
 router.get(
-    '/produtos',
+    '/api/produtos',
     auth,
     produtoController.listarProdutos
 );
 
 router.put(
-    '/produtos/:id',
+    '/api/produtos/:id',
     auth,
     produtoController.atualizarProduto
 );
 
 router.delete(
-    '/produtos/:id',
+    '/api/produtos/:id',
     auth,
     produtoController.deletarProduto
 );
