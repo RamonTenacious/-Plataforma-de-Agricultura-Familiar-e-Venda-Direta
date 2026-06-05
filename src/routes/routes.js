@@ -45,15 +45,26 @@ router.post(
     authController.login
 )
 
+const { User } = require('../models');
+
 router.get(
     '/perfil',
     auth,
-    (req, res) => {
+    async (req, res) => {
+        try {
+            const usuario = await User.findByPk(req.userId, {
+                attributes: ['id', 'nome', 'email']
+            });
 
-        res.json({
-            usuario: req.userId
-        });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuário não encontrado.' });
+            }
 
+            return res.json({ usuario });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Erro ao buscar perfil.' });
+        }
     }
 );
 

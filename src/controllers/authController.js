@@ -2,6 +2,10 @@ const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+const JWT_SECRET =
+    process.env.JWT_SECRET ||
+    'desenvolvimento-plataforma-agricultura-2026';
+
 async function register(req, res) {
 
     try {
@@ -64,9 +68,10 @@ async function login(req, res) {
         const token = jwt.sign(
             {
                 id: user.id,
-                email: user.email
+                email: user.email,
+                nome: user.nome
             },
-            process.env.JWT_SECRET,
+            JWT_SECRET,
             {
                 expiresIn: '1d'
             }
