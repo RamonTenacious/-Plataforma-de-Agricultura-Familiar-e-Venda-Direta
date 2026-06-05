@@ -194,10 +194,9 @@
             element.classList.toggle('d-none', !logged);
         });
 
-        const badge = document.querySelector('[data-user-badge]');
-        if (badge) {
+        document.querySelectorAll('[data-user-badge]').forEach((badge) => {
             badge.textContent = logged ? 'Usuário logado' : 'Visitante';
-        }
+        });
     }
 
     function closeMobileMenu() {
@@ -351,6 +350,11 @@
 
             const produtos = await response.json();
             renderProducts(produtos, target);
+
+            const countEl = document.querySelector('[data-produtos-count]');
+            if (countEl) {
+                countEl.textContent = produtos.length;
+            }
 
             target.querySelectorAll('[data-delete-product]').forEach((button) => {
                 button.addEventListener('click', handleDeleteProduct);
@@ -581,14 +585,14 @@
     }
 
     async function loadProfile() {
-        const nameField = document.querySelector('[data-profile-name]');
+        const nameFields = document.querySelectorAll('[data-profile-name]');
         const emailField = document.querySelector('[data-profile-email]');
         const idField = document.querySelector('[data-profile-id]');
-        const initialsField = document.querySelector('[data-profile-initials]');
+        const initialsFields = document.querySelectorAll('[data-profile-initials]');
         const container = document.querySelector('[data-profile-loading]');
         const tokenPayload = decodeJwt(state.token || getToken()) || {};
 
-        if (!nameField && !emailField && !idField && !initialsField) {
+        if (!nameFields.length && !emailField && !idField && !initialsFields.length) {
             return;
         }
 
@@ -605,9 +609,7 @@
             const profileEmail = usuario.email ?? tokenPayload.email ?? '-';
             const profileName = usuario.nome ?? tokenPayload.nome ?? 'Usuário logado';
 
-            if (nameField) {
-                nameField.textContent = profileName;
-            }
+            nameFields.forEach((el) => { el.textContent = profileName; });
 
             if (emailField) {
                 emailField.textContent = profileEmail;
@@ -617,15 +619,14 @@
                 idField.textContent = profileId;
             }
 
-            if (initialsField) {
-                const initials = (profileName || 'U')
-                    .split(' ')
-                    .filter(Boolean)
-                    .slice(0, 2)
-                    .map((part) => part[0].toUpperCase())
-                    .join('');
-                initialsField.textContent = initials || 'U';
-            }
+            const initials = (profileName || 'U')
+                .split(' ')
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((part) => part[0].toUpperCase())
+                .join('');
+
+            initialsFields.forEach((el) => { el.textContent = initials || 'U'; });
 
             if (container) {
                 container.classList.add('d-none');
